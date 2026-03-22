@@ -1,2 +1,2 @@
-# portifolio
-portifolio Rodrigo Cafiero UX/UI Designer
+# Portifolio
+Rodrigo Cafiero UX/UI Designer
