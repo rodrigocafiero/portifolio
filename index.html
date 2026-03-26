@@ -19,7 +19,7 @@
     --font-body: 'DM Sans', sans-serif;
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; }
   body { background: var(--cream); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
   .page { display: none; min-height: 100vh; }
@@ -1144,9 +1144,14 @@
     const t = document.getElementById('page-' + id);
     if (t) {
       t.classList.add('active');
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      window.scrollTo(0, 0);
+      // Force scroll after browser paints the new page
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        });
+      });
       initReveals();
     }
   }
